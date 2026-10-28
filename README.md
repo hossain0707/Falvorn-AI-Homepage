@@ -11,13 +11,13 @@ npm run check
 npm run build
 ```
 
-Vercel runs `npm run build` and serves `dist`. The connected `main` branch is the production source.
+Vercel runs `npm run build` and serves `dist`. The `main` branch is the source of truth. The first Vercel production deployment was uploaded directly because the Vercel GitHub integration is not installed for this repository. Connect that integration to enable automatic code deployments. Until then, code changes require a new direct deployment.
 
 ## Products and journal
 
 - `content/products.json` contains the reviewed product catalog and public product/demo destinations. Product cards open product details rather than repository links.
 - `content/posts.json` contains news and engineering articles. Article bodies are paragraph arrays, rendered as text rather than executable HTML.
-- The contributor studio provides a browser-only draft editor and JSON export. Publishing uses GitHub authentication and repository permissions: authorized collaborators edit `content/posts.json`, review, and commit or merge. Vercel then deploys the new version. There is no client-side admin password or unauthenticated write endpoint.
+- The contributor studio provides a browser-only draft editor and JSON export. Publishing uses GitHub authentication and repository permissions: authorized collaborators edit `content/posts.json`, review, and commit or merge. The homepage reads published journal JSON from the public GitHub main branch (subject to CDN caching), falling back to the bundled copy when unavailable. Code/layout changes still require a deployment. There is no client-side admin password or unauthenticated write endpoint.
 - Give publishing access only to intended contributors through GitHub repository settings. Enable branch protection/review rules if desired. Public fork pull requests are proposals, not publication rights.
 
 ## Interactive experiences
