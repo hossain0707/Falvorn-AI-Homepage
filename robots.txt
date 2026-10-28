@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://falvorn-ai-homepage.vercel.app/sitemap.xml

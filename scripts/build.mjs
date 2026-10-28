@@ -1,5 +1,13 @@
-import {mkdir,copyFile,cp,rm} from 'node:fs/promises';
+import {mkdir,copyFile,cp,rm,readFile,writeFile} from 'node:fs/promises';
 await rm('dist',{recursive:true,force:true});await mkdir('dist',{recursive:true});
-for(const f of ['index.html','styles.css','app.js','favicon.svg','robots.txt'])await copyFile(f,'dist/'+f);
+for(const f of ['styles.css','app.js','motion.js','favicon.svg','robots.txt','sitemap.xml'])await copyFile(f,'dist/'+f);
 for(const d of ['assets','content'])await cp(d,'dist/'+d,{recursive:true});
-console.log('Built Falvorn AI → dist');
+const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const products=JSON.parse(await readFile('content/products.json','utf8'));
+const posts=JSON.parse(await readFile('content/posts.json','utf8'));
+let html=await readFile('index.html','utf8');
+const cards=products.map(p=>`<article class="product-card"><div class="card-head"><span class="product-icon" aria-hidden="true">${escape(p.icon)}</span><span class="status">${escape(p.status)}</span></div><h3>${escape(p.name)}</h3><p>${escape(p.description)}</p><div class="card-bottom"><span>${escape(p.category.toUpperCase())}</span><button data-product="${escape(p.id)}" aria-label="Explore ${escape(p.name)}">Explore product</button></div></article>`).join('');
+const stories=posts.map((p,i)=>`<article class="post-card"><div class="post-art" aria-hidden="true"><span>${['↗','⌘','◫'][i%3]}</span></div><div class="post-meta">${escape(p.type.toUpperCase())}<time datetime="${escape(p.date)}">${escape(p.date)}</time></div><h3>${escape(p.title)}</h3><p>${escape(p.excerpt)}</p><button data-story="${escape(p.id)}">Read story ↗</button></article>`).join('');
+html=html.replace('<div id="product-grid" class="product-grid" aria-live="polite"></div>',`<div id="product-grid" class="product-grid" aria-live="polite">${cards}</div>`).replace('<div class="posts" id="posts"></div>',`<div class="posts" id="posts">${stories}</div>`);
+await writeFile('dist/index.html',html);
+console.log(`Built Falvorn AI: ${products.length} prerendered products, ${posts.length} articles, local motion assets.`);

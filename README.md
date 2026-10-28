@@ -31,3 +31,16 @@ The contact form opens an email draft; it does not send messages or store submis
 ## Ownership
 
 Copyright © 2026 Md Najmul Hossain. All rights reserved. Original site code, copy, branding, and supplied imagery are proprietary. Third-party products and trademarks retain their owners' rights. Independent projects are not represented as endorsed by NVIDIA or other vendors.
+
+
+## Cinematic edition — 2026-10-29
+
+- Locally drawn ocean wave canvas, four scroll-linked product chapters, seven visual motifs with product-specific accents, and animated product dialogs.
+- No animation library, third-party font, video download or model API. Static product cards and article summaries are prerendered into the build for first-load resilience and indexing.
+- Motion can be paused with a persistent browser preference. System reduced-motion settings disable animation and replace the long sticky presentation with selectable scenes. Mobile uses selectable scenes without the long scroll section.
+- Canvas resolution is capped at 1.5 device pixel ratio, approximately 25 fps, with fewer lines on mobile. Canvas rendering stops offscreen and when the document is hidden. Product animations run only near the viewport. All CSS animation pauses when the page is hidden.
+- Existing contact email-draft flow, journal permissions, and product maturity labels remain. This is a marketing-site release, not a production certification of the listed product backends.
+
+### Release verification
+
+Run `npm run check`, `node --check app.js`, `node --check motion.js`, and `npm run build`. Verify chapter selection, scroll transitions, pause/resume, filtered product artwork, dialogs, and playground controls in the browser. A private QA iframe can inspect the mobile layout without shipping a QA route.
