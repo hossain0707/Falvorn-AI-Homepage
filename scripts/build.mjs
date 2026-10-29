@@ -1,6 +1,6 @@
 import {mkdir,copyFile,cp,rm,readFile,writeFile} from 'node:fs/promises';
 await rm('dist',{recursive:true,force:true});await mkdir('dist',{recursive:true});
-for(const f of ['styles.css','app.js','motion.js','favicon.svg','robots.txt','sitemap.xml'])await copyFile(f,'dist/'+f);
+for(const f of ['styles.css','app.js','motion.js','spatial.js','favicon.svg','robots.txt','sitemap.xml'])await copyFile(f,'dist/'+f);
 for(const d of ['assets','content'])await cp(d,'dist/'+d,{recursive:true});
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const products=JSON.parse(await readFile('content/products.json','utf8'));
