@@ -44,3 +44,9 @@ Copyright © 2026 Md Najmul Hossain. All rights reserved. Original site code, co
 ### Release verification
 
 Run `npm run check`, `node --check app.js`, `node --check motion.js`, and `npm run build`. Verify chapter selection, scroll transitions, pause/resume, filtered product artwork, dialogs, and playground controls in the browser. A private QA iframe can inspect the mobile layout without shipping a QA route.
+
+### Investor presentation edition
+
+The homepage includes a charcoal and mint visual identity, a falcon hero, three connected product frontiers, and a dedicated investor/strategic partner section. Founder contact links prepare an email; they do not submit a form or claim a booked meeting. Investment copy describes current work and discussion topics without inventing funding, customers, revenue, or commercial readiness.
+
+Validation: desktop and 375px-content-width browser previews, mobile navigation, product filtering/details, motion controls, content checks, and static production build. Existing product maturity labels remain visible. This presentation update does not change the operational readiness of linked products.
